@@ -6,6 +6,7 @@
     <title>Infografis: Efisiensi Biaya pada Lisensi Odoo dalam Pemanfaatan Google One AI Pro 2TB </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -16,7 +17,7 @@
         .chart-container {
             position: relative;
             margin: auto;
-            height: 40vh;
+            height: 45vh;
             width: 90vw;
             max-width: 600px;
         }
@@ -59,6 +60,7 @@
                                 <th class="p-4 font-semibold text-sm md:text-base">Fitur / Manfaat</th>
                                 <th class="p-4 font-semibold text-center text-sm md:text-base">Odoo (6 Lisensi)</th>
                                 <th class="p-4 font-semibold text-center text-sm md:text-base">Google One AI Premium</th>
+                                <th class="p-4 font-semibold text-center text-sm md:text-base">Catatan</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -66,31 +68,37 @@
                                 <td class="p-4 font-medium">Kontrol Dokumen</td>
                                 <td class="p-4 text-center text-green-600 font-bold">✔️ Berdasarkan user/grup</td>
                                 <td class="p-4 text-center text-red-500"> ❌ Hanya akses per user saja</td>
+                                <td class="p-4 text-xs">Odoo unggul untuk alur kerja terintegrasi, Google untuk berbagi file umum.</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="p-4 font-medium">Backup Data & Keamanan</td>
                                 <td class="p-4 text-center text-red-500">❌ Tidak Ada</td>
                                 <td class="p-4 text-center text-green-600 font-bold">✔️ Otomatis & Terpusat</td>
+                                <td class="p-4 text-xs">Google One adalah solusi backup khusus yang tidak dimiliki Odoo.</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="p-4 font-medium">Kolaborasi Meeting & Record</td>
                                 <td class="p-4 text-center text-red-500">❌ Hanya meeting</td>
                                 <td class="p-4 text-center text-green-600 font-bold">✔️ Fitur Premium Lengkap</td>
+                                <td class="p-4 text-xs">Fitur perekaman dan live stream adalah nilai tambah utama Google.</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="p-4 font-medium">Penggunaan AI</td>
                                 <td class="p-4 text-center text-red-500">❌ Tidak Ada</td>
                                 <td class="p-4 text-center text-green-600 font-bold">✔️ Gemini, VEO, Vids & NotebookLM</td>
+                                <td class="p-4 text-xs">Kapabilitas AI menjadi pembeda utama untuk inovasi.</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="p-4 font-medium">Dukungan Departemen</td>
                                 <td class="p-4 text-center text-green-600 font-bold">✔️ Menyeluruh (ERP)</td>
                                 <td class="p-4 text-center text-red-500">❌ Terbatas (R&D/Procurement,Bisnis, Marketing & IT)</td>
+                                <td class="p-4 text-xs">Odoo adalah sistem ERP inti, Google One sebagai alat pendukung.</td>
                             </tr>
                             <tr class="hover:bg-gray-50">
                                 <td class="p-4 font-medium">Biaya & Efisiensi</td>
                                 <td class="p-4 text-center text-red-500">❌ Tinggi</td>
                                 <td class="p-4 text-center text-green-600 font-bold">✔️ Hemat 75%</td>
+                                <td class="p-4 text-xs">Penghematan biaya langsung adalah keuntungan finansial yang jelas.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -229,6 +237,8 @@
             return lines;
         };
 
+        Chart.register(ChartDataLabels);
+
         const ctx = document.getElementById('costComparisonChart').getContext('2d');
         const costComparisonChart = new Chart(ctx, {
             type: 'bar',
@@ -286,6 +296,18 @@
                                 }
                                 return label;
                             }
+                        }
+                    },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        formatter: (value, context) => {
+                           return 'Rp ' + new Intl.NumberFormat('id-ID').format(value * 1000000);
+                        },
+                        color: '#374151',
+                        font: {
+                            weight: 'bold',
+                            size: 14,
                         }
                     }
                 }
